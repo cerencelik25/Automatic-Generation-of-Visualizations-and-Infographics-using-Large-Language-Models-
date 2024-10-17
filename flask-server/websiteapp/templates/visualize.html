@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Data Visualization{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Data Visualization Results</h2>
+
+    <form method="POST" action="{{ url_for('views.visualize') }}">
+        <div class="form-group">
+            <label for="query">Enter your query:</label>
+            <input type="text" id="query" name="query" class="form-control" placeholder="e.g., Show me the sales trend over the last year" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if combined_responses %}
+        <div id="visualization-results">
+            {% for response, img_base64 in combined_responses %}
+                <div class="response-block">
+                    <p>{{ response }}</p>
+                    {% if img_base64 %}
+                        <img src="data:image/png;base64,{{ img_base64 }}" alt="Generated Visualization" class="generated-image">
+                        
+                        <!-- Download Buttons -->
+                        <div class="download-buttons">
+                            <form action="/download_image" method="POST">
+                                <input type="hidden" name="format" value="png">
+                                <button type="submit" class="btn btn-primary">Download PNG</button>
+                            </form>
+                            <form action="/download_image" method="POST">
+                                <input type="hidden" name="format" value="pdf">
+                                <button type="submit" class="btn btn-secondary">Download PDF</button>
+                            </form>
+                            <form action="/download_image" method="POST">
+                                <input type="hidden" name="format" value="svg">
+                                <button type="submit" class="btn btn-tertiary">Download SVG</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No visualizations available yet. Please upload a dataset and ask questions to generate insights.</p>
+    {% endif %}
+</div>
+{% endblock %}

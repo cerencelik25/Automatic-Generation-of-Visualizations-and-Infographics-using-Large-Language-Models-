@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<header class="gpt3__header section__padding" id="home">
+    <div class="gpt3__header-content">
+        <h1 class="gradient__text">Let&apos;s Automatic Generation of Visualizations and Infographics using LLMs</h1>
+        <p>The primary objective of this project is to develop a platform with a frontend (HTML, JavaScript, CSS) and a Flask backend, where users can upload datasets (e.g., Excel, CSV) and ask questions. The platform will automatically generate visualizations (e.g., plots, graphs) and provide insights (text summaries and explanations) using large language models (LLMs).</p>
+
+        <div class="gpt3__header-content__input">
+            <input type="email" placeholder="Your Email Address" />
+            <button type="button">Get Started</button>
+        </div>
+
+        <div class="gpt3__header-content__people">
+            <img src="{{ url_for('static', filename='people.png') }}" alt="People requesting access" />
+            <p>1,600 people requested access a visit in last 24 hours</p>
+        </div>
+    </div>
+
+    <div class="gpt3__header-image">
+        <img src="{{ url_for('static', filename='ai.png') }}" alt="AI illustration" />
+    </div>
+</header>
+{% endblock %}

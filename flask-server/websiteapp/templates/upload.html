@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Upload Files{% endblock %}
+{% block content %}
+
+<!-- Upload Section -->
+<div class="container mt-5">
+    <h1 class="text-center">Upload Your File</h1>
+    <p class="text-center">Select a file to upload for analysis and visualization.</p>
+    
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
+        <div class="form-group">
+            <label for="file" class="btn btn-primary btn-lg">Choose File</label>
+            <input type="file" name="file" id="file" class="form-control-file" style="display: none;" required>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg">Upload</button>
+    </form>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mt-4">
+                <ul class="list-group">
+                {% for category, message in messages %}
+                    <li class="list-group-item list-group-item-{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+{% endblock %}
